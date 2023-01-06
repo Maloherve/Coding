@@ -1,0 +1,101 @@
+:root{
+    /* Theme Page Colors */
+    --main-color: rgb(150, 190, 190);
+    --main-color-light: rgb(34, 34, 34);
+    --main-color-lighter: rgb(48, 48, 48);
+    --secondary-color: rgb(4, 170, 200);
+    --focus-color: rgb(22,63,114);
+
+    /* Theme font colors */
+    --text-color: white;
+    --text-color-dark: rgb(150,150,150);
+    --text-color-darker: rgb(90,90,90);
+}
+
+body {
+    background: var(--main-color);
+    color: #fff;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+/* General Preparation */
+
+.card_container {
+    --number-of-card: 5;
+    --card-size: 200px;
+
+    display: grid;
+    height: var(--card-size);
+    width: calc(var(--card-size) * var(--number-of-card));
+
+    grid-template: 100% / repeat( var(--number-of-card) , 1fr);
+    grid-column-gap: 5px;
+}
+
+.card_container .card{
+    border-radius: 25px;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+
+/* Fade all other elements on hover */
+
+.hover_fade .card{
+    transition: opacity .3s;
+
+}
+
+.hover_fade .card_container:hover > :not(:hover){
+    opacity: .5;
+}
+
+
+/* Card selection effect */
+
+.card_select .card_container{
+    display: flex;
+    gap: 20px;
+
+    margin-left: 50px;
+    --number-of-card: 5;
+    --card-size: 200px;
+}
+
+.card_select .card{
+    height: var(--card-size);
+    width: var(--card-size);
+    transition: .3s ease-in-out;
+    box-shadow: -.5rem 0 1rem #000;
+}
+
+.card_select .card + .card{
+    margin-left: -10%;
+}
+
+
+.card_select .card:hover{
+    transform: rotate(-4deg);
+}
+
+.card_select .card:hover ~ .card{
+    z-index: 1;
+    translate: 60px;
+}
+
+
+/*  Card Grows when selected */
+
+.grow_select .card{
+    transition: all .3s ease-in-out;
+
+}
+
+.grow_select .card_container .card:hover{
+    transform: scale(1.2);
+}
+
+.grow_select .card_container:hover > :not(:hover){
+    opacity: .3;
+}

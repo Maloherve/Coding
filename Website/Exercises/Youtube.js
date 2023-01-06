@@ -3,6 +3,9 @@ const channelIconFolder = assetsFolder+"icons/"
 const thumbnailFolder = assetsFolder+"thumbnail/"
 
 
+
+// ----- Adding Videos -----
+
 class Video{
     constructor(thumbnailURL, iconURL, title, channel, views, daysAgo){
         this._thumbnailURL = thumbnailURL;
@@ -80,12 +83,6 @@ function createElementWithClass (type, class_name, content = "") {
 
 
 
-
-
-
-
-
-
 const video1 = new Video(thumbnailFolder+"thumbnail1.png", channelIconFolder+"icon2.png", "Des gens se mettent ensemble et ca fait des trucs cool (je te jure)", "Channel", "86k", "8")
 video1.publishVideo()
 
@@ -107,4 +104,15 @@ video6.publishVideo()
 
 
 
+
+
+// ----- Filter Bar Scrolling
+
+
+const scrollContainer = document.getElementsByClassName("top_filter")[0]
+
+scrollContainer.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    scrollContainer.scrollLeft += event.deltaY
+});
 

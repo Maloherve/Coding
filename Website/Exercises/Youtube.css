@@ -249,8 +249,6 @@ header button{
 
   flex-direction: column;
   align-items: center;
-
-  /* background-color: darkblue; */
 }
 
 /* ----- Filter Top Bar ----- */
@@ -264,8 +262,6 @@ header button{
 
   overflow: scroll;
   align-items: center;
-
-  /* background-color: darkred */
 }
 
 
@@ -286,6 +282,16 @@ header button{
 .top_filter div:hover{
   background-color: var(--main-color-lighter);
 }
+
+
+.top_filter div:checked{
+  background-color: white;
+}
+
+.bottom_container:checked{
+  background-color: white;
+}
+
 
 ::-webkit-scrollbar {
   display: none;
