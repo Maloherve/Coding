@@ -398,6 +398,8 @@ p.video_metadata{
   width: 5px;
   height: 5px;
   margin-bottom: 2px;
+  margin-right: 5px;
+  margin-left: 5px;
   
   background-color: var(--text-color-dark);
   border-radius: 100%;
