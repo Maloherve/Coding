@@ -4,6 +4,7 @@
     --main-color-light: rgb(34, 34, 34);
     --main-color-lighter: rgb(48, 48, 48);
     --secondary-color: rgb(4, 170, 200);
+    --tercary-color: rgb(103, 161, 65);
     --focus-color: rgb(22,63,114);
 
     /* Theme font colors */
@@ -80,9 +81,9 @@ body {
 }
 
 .card_select .card:hover ~ .card{
-    z-index: 1;
     translate: 60px;
 }
+
 
 
 /*  Card Grows when selected */
@@ -99,3 +100,76 @@ body {
 .grow_select .card_container:hover > :not(:hover){
     opacity: .3;
 }
+
+
+
+
+
+/*  Wheel   */
+
+
+.wheel .card_container{
+    display: block;
+
+    height: var(--card-size);
+    width: 800px;
+    
+    margin-left: 400px;
+    --card-size: 200px;
+}
+
+.wheel .card{
+    position: absolute;
+    height: var(--card-size);
+    width: var(--card-size);
+    text-align: center;
+
+    background-color: bisque;
+    box-shadow: 0rem 0 1rem #000;
+    transition: all .3s linear;
+
+}
+
+.wheel .card:nth-child(1){
+    background-color: rgb(103, 161, 65);
+}
+.wheel .card:nth-child(2){
+    background-color: rgb(88, 138, 55);
+}
+.wheel .card:nth-child(3){
+    background-color: rgb(63, 97, 40);
+}
+.wheel .card:nth-child(4){
+    background-color: rgb(55, 85, 35);
+}
+.wheel .card:nth-child(5){
+    background-color: rgb(31, 48, 19);
+}
+
+
+
+
+
+/*   Card Flip   */
+
+.card_flip .card {
+    /* background-color: red; */
+    background-color: transparent;
+    border: 1px solid black;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

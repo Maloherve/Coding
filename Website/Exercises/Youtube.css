@@ -75,10 +75,29 @@ header .button_container:not(#youtube_button):hover{
 }
 
 .left{
+  width: 180px;
+  flex-shrink: 0;
+
   gap: 5px;
+  background-color: darkred;
 }
+
+.middle{
+  width: 655px;
+  flex-shrink: 1;
+
+  --form-curve: 20px;
+  align-items: center;
+
+  background-color: green;
+}
+
 .right{
+  width: 130px;
+  flex-shrink: 0;
+
   gap: 15px;
+  background-color: darkblue;
 }
 
 #sidebar_button{ 
@@ -126,11 +145,6 @@ header button{
 
 /* --- Search Bar --- */
 
-.middle{
-  --form-curve: 20px;
-  align-items: center;
-}
-
 .middle input{
   height: 40px;
   border: solid 1px var(--main-color-lighter);
@@ -144,6 +158,7 @@ header button{
   padding-left: var(--form-curve);
   border-radius: var(--form-curve) 0px 0px var(--form-curve);
   background-color: var(--main-color);
+  flex-shrink: 1;
 
   font-size: 17px;
 }
@@ -160,6 +175,7 @@ header button{
   border-left-width: 0px;
   border-radius: 0px var(--form-curve) var(--form-curve) 0px;
   cursor: pointer;
+  flex-shrink: 1;
 }
 
 
@@ -253,8 +269,6 @@ header button{
 
 /* ----- Filter Top Bar ----- */
 
-
-
 .top_filter{
   display: flex;
   height: var(--filter-bar-height);
@@ -264,8 +278,11 @@ header button{
   align-items: center;
 }
 
+/* #filter{display: none;} */
 
-.top_filter div{
+
+
+.top_filter label{
   line-height: calc(var(--filter-bar-height) - 20px );
   height: calc(var(--filter-bar-height) - 20px );
   flex-shrink: 0;
@@ -279,16 +296,12 @@ header button{
   background-color: var(--main-color-light);
 }
 
-.top_filter div:hover{
+.top_filter label:hover{
   background-color: var(--main-color-lighter);
 }
 
 
-.top_filter div:checked{
-  background-color: white;
-}
-
-.bottom_container:checked{
+#filter:checked + div > ::selection{
   background-color: white;
 }
 
@@ -326,12 +339,22 @@ header button{
   width: 360px;
   height: 310px;
   margin: 0;
-
+  
   flex-direction: column;
   align-items: center;
-
-  /* background-color: green; */
+  
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all .3s ease-in-out 0s; /* Make return no delay */
 }
+
+
+.video_container:hover{
+  transform: scale(1.2);
+  transition: all .3s ease-in-out 1s; 
+  background-color: var(--main-color-light);
+}
+
 
 
 .thumbnail{
