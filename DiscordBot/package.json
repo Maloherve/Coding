@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "CthulhuBot.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.7.1",
-    "node-fetch": "^3.3.0"
+    "node-fetch": "^3.3.0",
+    "sync-google-sheet": "^1.8.0"
   }
 }
