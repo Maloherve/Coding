@@ -1,2 +1,3 @@
 DiscordBot/node_modules/*
-DiscordBot/config.json
+DiscordBot/token_bot.json
+DiscordBot/token_sheets.json
