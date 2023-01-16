@@ -1,3 +1,57 @@
+const { GoogleSpreadsheet } = require('google-spreadsheet');
+const { creds } = require('./token_sheets.json');
+
+// spreadsheet key is the long id in the sheets URL
+const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
+
+
+
+// ------ Console Logging -----
+
+function printGame(gameRow){
+  console.log(`Title : ${gameRow['Title']}`)
+  console.log(`Release Date : ${gameRow['Release Date']}`)
+  console.log(`Console : ${gameRow['Console']}`)
+  console.log(`Description : ${gameRow['Description']}`)
+  console.log(`----------------------`)
+}
+
+
+function printSheetInfo(sheet){
+  console.log(`~~~~~~~~~~~~~~~~~~~~~~`)
+  console.log(`Sheet Title : ${sheet.title}`)
+  console.log(`Rows : ${sheet.rowCount}, Columns : ${sheet.columnCount}`)
+  console.log(`~~~~~~~~~~~~~~~~~~~~~~`)
+}
+
+// ------------------------------------------------
+
+
+
+
+// Loading Spreadsheet
+async function accessSpreadsheet() {
+
+  // Authentificate using API key
+  await doc.useServiceAccountAuth({
+    client_email: creds.client_email,
+    private_key: creds.private_key,
+  });
+
+  // Load document properties and worksheets
+  await doc.loadInfo(); 
+  const sheet = doc.sheetsByIndex[0];
+
+  printSheetInfo(sheet)
+  
+  const rows = await sheet.getRows({
+    offset: 0,
+    limit: 10,
+    orderby: 'Release Date'
+  })
+
+  rows.forEach(row => printGame(row))
+}
 
 
 
@@ -5,38 +59,7 @@
 
 
 
-
-// function loadData() {
-//     var url="https://docs.google.com/spreadsheets/d/e/2PACX-1vSjDw8QGEmSZUkWI64-DXGHFnPw0DqihZMWYUnbu4i9bjGTpImECSbVaIJddEU1GpFIkgANbcIHgrso/pubhtml?gid=0&single=true";
-//     let xmlhttp=new XMLHttpRequest();
-//     xmlhttp.onreadystatechange = function() {
-//       if(xmlhttp.readyState == 4 && xmlhttp.status==200){
-//         document.getElementById("display").innerHTML = xmlhttp.responseText;
-//       }
-//     };
-//     xmlhttp.open("GET",url,true);
-//     xmlhttp.send(null);
-//   }
-// loadData()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+accessSpreadsheet()
 
 
 
