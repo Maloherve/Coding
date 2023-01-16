@@ -1,65 +1,66 @@
-const { GoogleSpreadsheet } = require('google-spreadsheet');
-const { creds } = require('./token_sheets.json');
+// const { GoogleSpreadsheet } = require('google-spreadsheet');
+// const { creds } = require('./token_sheets.json');
+// const { CronJob } = require('cron')
 
-// spreadsheet key is the long id in the sheets URL
-const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
-
-
-
-// ------ Console Logging -----
-
-function printGame(gameRow){
-  console.log(`Title : ${gameRow['Title']}`)
-  console.log(`Release Date : ${gameRow['Release Date']}`)
-  console.log(`Console : ${gameRow['Console']}`)
-  console.log(`Description : ${gameRow['Description']}`)
-  console.log(`----------------------`)
-}
-
-
-function printSheetInfo(sheet){
-  console.log(`~~~~~~~~~~~~~~~~~~~~~~`)
-  console.log(`Sheet Title : ${sheet.title}`)
-  console.log(`Rows : ${sheet.rowCount}, Columns : ${sheet.columnCount}`)
-  console.log(`~~~~~~~~~~~~~~~~~~~~~~`)
-}
-
-// ------------------------------------------------
+// // spreadsheet key is the long id in the sheets URL
+// const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
 
 
 
+// // ------ Console Logging -----
 
-// Loading Spreadsheet
-async function accessSpreadsheet() {
+// function printGame(gameRow){
+//   console.log(`Title : ${gameRow['Title']}`)
+//   console.log(`Release Date : ${gameRow['Release Date']}`)
+//   console.log(`Console : ${gameRow['Console']}`)
+//   console.log(`Description : ${gameRow['Description']}`)
+//   console.log(`----------------------`)
+// }
 
-  // Authentificate using API key
-  await doc.useServiceAccountAuth({
-    client_email: creds.client_email,
-    private_key: creds.private_key,
-  });
 
-  // Load document properties and worksheets
-  await doc.loadInfo(); 
-  const sheet = doc.sheetsByIndex[0];
+// function printSheetInfo(sheet){
+//   console.log(`~~~~~~~~~~~~~~~~~~~~~~`)
+//   console.log(`Sheet Title : ${sheet.title}`)
+//   console.log(`Rows : ${sheet.rowCount}, Columns : ${sheet.columnCount}`)
+//   console.log(`~~~~~~~~~~~~~~~~~~~~~~`)
+// }
 
-  printSheetInfo(sheet)
+// // ------------------------------------------------
+
+
+
+
+// // Loading Spreadsheet
+// async function accessSpreadsheet() {
+
+//   // Authentificate using API key
+//   await doc.useServiceAccountAuth({
+//     client_email: creds.client_email,
+//     private_key: creds.private_key,
+//   });
+
+//   // Load document properties and worksheets
+//   await doc.loadInfo(); 
+//   const sheet = doc.sheetsByIndex[0];
+
+//   printSheetInfo(sheet)
   
-  const rows = await sheet.getRows({
-    offset: 0,
-    limit: 10,
-    orderby: 'Release Date'
-  })
+//   const rows = await sheet.getRows({
+//     offset: 0,
+//     limit: 10,
+//     orderby: 'Release Date'
+//   })
 
-  rows.forEach(row => printGame(row))
-}
-
-
+//   rows.forEach(row => printGame(row))
+// }
 
 
 
 
 
-accessSpreadsheet()
+
+
+// accessSpreadsheet()
 
 
 
@@ -83,9 +84,11 @@ accessSpreadsheet()
 
 
 // ----- Modifying a JSON Dictionary Using ES6 -----
-// import fs from 'fs'
-// let data = fs.readFileSync('DiscordBot/database.json')
-// var myObject = JSON.parse(data)[0]
+
+const fs = require('fs')
+let data = fs.readFileSync('DiscordBot/activeOn.json')
+var myObject = JSON.parse(data)[0]
+
 // function modifyDatabaseEntry(key, type, value){
 //     let file = fs.readFileSync('DiscordBot/database.json');
 //     var myObject = JSON.parse(file);
