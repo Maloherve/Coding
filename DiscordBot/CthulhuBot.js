@@ -47,14 +47,17 @@ function updateActiveGuilds(){
 
 
 
-
 function checkCommand(command){
     command.toLowerCase()
     switch (command){
         case 'release':
             return () => checkReleases()
-        default: 
-            return () => checkReleases()
+        case 'list':
+            return () => accessSpreadsheet()
+        case 'info':
+            return () => gameInfo()
+        case 'tut':
+            return () => snoot()
     }  
 }
 
@@ -65,9 +68,15 @@ function checkCommand(command){
 
 
 
-    // -------------- Access Spreadsheet --------------
+// -------------- Access Spreadsheet --------------
 
-async function checkReleases(channel){
+
+function getCommingGames(){
+    
+}
+
+
+async function checkReleases(){
     console.log("Checking game releases")
     // Spreadsheet key is the long id in the sheets URL
     const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
@@ -92,7 +101,7 @@ async function checkReleases(channel){
     const dateList = rows.map(row => new Date(convertDDMMYYYToDate(row['Release Date'])) );
     dateList.sort((a,b) => {return a-b; } )
     var today = new Date();
-    today = new Date(convertDDMMYYYToDate('22.02.2023'));
+    // today = new Date(convertDDMMYYYToDate('22.02.2023')); // For Debugging
 
     // Check release Date
     if (dateList.includes(today)) { 
@@ -107,6 +116,19 @@ async function checkReleases(channel){
         return text;
     }
 }
+
+async function accessSpreadsheet(){
+    return 'If you want to access game releases or contribute : https://docs.google.com/spreadsheets/d/1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M/edit#gid=0'
+}
+
+async function gameInfo(){
+    const GameRow = getCommingGames();
+}
+
+
+
+
+
 
 
 
@@ -134,9 +156,7 @@ function printDate(date){
 // When Bot Connects
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}`)
-    // client.channels.cache.get('1063580431146045570').send('I have come online, tremble.')
-    // const guildList = client.guilds.cache.map(g => g.name)
-    // console.log(guildList)
+    client.user.setUsername('JibeBot');
     updateActiveGuilds()
 })
 
@@ -153,18 +173,25 @@ client.on('messageCreate', msg => {
         var message = msg.content.slice(1)
         const functionToExecute = checkCommand(message)
         if (functionToExecute){ 
-            functionToExecute(msg.channel) 
+            functionToExecute() 
                 .then( reply => msg.channel.send(reply) )
         }
     }
 })
 
 
+// -------------- Easter Eggs --------------
+
+async function snoot(){
+    return 'snoot'
+}
+
+
+
+
+
+
 // -------------------------------------------------
-
-
-
-
 // const job = new CronJob('0 * 17 * * *', () => {
 //     sendMessage()
 // })
