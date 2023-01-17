@@ -1,14 +1,20 @@
 const { Client, Events, GatewayIntentBits, Guild } = require( 'discord.js' );
 const { CronJob } = require('cron'); // Used for executing a job at a given date / time
 const fs = require('fs');    // Used for accessing and modifying files
+const { GoogleSpreadsheet } = require('google-spreadsheet')     // access and modify google spreadsheet 
 
 const slash_symbol = "$"
-const config = require( './token_bot.json' );   // token for modifying bot
+const config = require( './token_bot.json' );   // Credentials for bot
+const sheetCreds = require('./token_sheets.json');  // Credentials for google sheet API
+const { join } = require('path');
 
 
 // Load Client with all authorizations
 const client = new Client({intents: 3276799})
 
+
+
+// -------------- Discord related stuff --------------
 
 function updateActiveGuilds(){
     const Guilds_String = fs.readFileSync('DiscordBot/activeOn.json', 'utf-8')
@@ -47,8 +53,9 @@ function checkCommand(command){
     switch (command){
         case 'release':
             return () => checkReleases()
-    }
-
+        default: 
+            return () => checkReleases()
+    }  
 }
 
 
@@ -56,9 +63,68 @@ function checkCommand(command){
 
 
 
-function checkReleases(channel){
+
+
+    // -------------- Access Spreadsheet --------------
+
+async function checkReleases(channel){
     console.log("Checking game releases")
+    // Spreadsheet key is the long id in the sheets URL
+    const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
+
+    // Authentificate using API key
+    await doc.useServiceAccountAuth({
+        client_email: sheetCreds.client_email,
+        private_key: sheetCreds.private_key,
+    });
+
+    // Load document properties and worksheets
+    await doc.loadInfo(); 
+    const sheet = doc.sheetsByIndex[0]; // First spreadsheet
+
+    // Extract Rows
+    const rows = await sheet.getRows({
+        offset: 0,
+        limit: 10000    
+    });
+    
+    // Extract Dates and format them in new array and sort
+    const dateList = rows.map(row => new Date(convertDDMMYYYToDate(row['Release Date'])) );
+    dateList.sort((a,b) => {return a-b; } )
+    var today = new Date();
+    today = new Date(convertDDMMYYYToDate('22.02.2023'));
+
+    // Check release Date
+    if (dateList.includes(today)) { 
+        return 'New release Today';
+    }else{
+        const nextDate = dateList.find(date => { return isFuture(today, date); })
+        const correspondingGameRows = rows.filter(row => { return row['Release Date']===printDate(nextDate) })
+        var text = `Next game release is ${correspondingGameRows[0]['Title']} on the ${printDate(nextDate)}.`;
+        if (correspondingGameRows.length > 1) {
+            text += (' ( And also ' + correspondingGameRows.slice(1).map(row => {return row['Title']}).join(', ') + ' )')
+        }
+        return text;
+    }
 }
+
+
+
+// -------------- Working with Dates --------------
+
+function isFuture(today, date){ return date >= today; }
+
+
+function convertDDMMYYYToDate(DDMMYYYY){
+    const split_date = DDMMYYYY.split('.');
+    const MMDDYYYY = [split_date[1],split_date[0],split_date[2]].join('.')
+    return new Date(MMDDYYYY); 
+}
+
+function printDate(date){
+    if (date.getMonth()+1 < 10) {return (date.getDate() + '.0' + (date.getMonth()+1) + '.' + date.getFullYear())}
+    else{return (date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear())}
+} 
 
 
 
@@ -86,7 +152,10 @@ client.on('messageCreate', msg => {
     if (msg.content[0] === slash_symbol){
         var message = msg.content.slice(1)
         const functionToExecute = checkCommand(message)
-        if (functionToExecute){ functionToExecute(msg.channel) }
+        if (functionToExecute){ 
+            functionToExecute(msg.channel) 
+                .then( reply => msg.channel.send(reply) )
+        }
     }
 })
 

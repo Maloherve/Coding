@@ -1,3 +1,57 @@
+
+
+var test = [1,2,3,4,5,6,7]
+
+console.log(test.slice(1))
+
+
+
+// let Dates = [ '20.03.2023', '24.10.2023', '27.01.2024', '29.02.2023', '21.09.2023', '24.02.2023', '24.02.2023', '03.05.2023', '17.04.2023', '22.03.2023' ]
+
+
+// function convertDDMMYYYToDate(DDMMYYYY){
+//     const split_date = DDMMYYYY.split('.');
+//     const MMDDYYYY = [split_date[1],split_date[0],split_date[2]].join('.')
+//     return new Date(MMDDYYYY); 
+// }
+
+
+// const dateList = Dates.map(date => new Date(convertDDMMYYYToDate(date)) );
+// dateList.sort((a,b) => {return a-b})
+// console.log(dateList)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // const { GoogleSpreadsheet } = require('google-spreadsheet');
 // const { creds } = require('./token_sheets.json');
 // const { CronJob } = require('cron')
@@ -83,11 +137,11 @@
 
 
 
-// ----- Modifying a JSON Dictionary Using ES6 -----
+// // ----- Modifying a JSON Dictionary Using ES6 -----
 
-const fs = require('fs')
-let data = fs.readFileSync('DiscordBot/activeOn.json')
-var myObject = JSON.parse(data)[0]
+// const fs = require('fs')
+// let data = fs.readFileSync('DiscordBot/activeOn.json')
+// var myObject = JSON.parse(data)[0]
 
 // function modifyDatabaseEntry(key, type, value){
 //     let file = fs.readFileSync('DiscordBot/database.json');
