@@ -1,17 +1,28 @@
-const { Client, Events, GatewayIntentBits, Guild } = require( 'discord.js' );
-const { CronJob } = require('cron'); // Used for executing a job at a given date / time
-const fs = require('fs');    // Used for accessing and modifying files
+const { Client, Collection, Events, GatewayIntentBits } = require( 'discord.js' );
 const { GoogleSpreadsheet } = require('google-spreadsheet')     // access and modify google spreadsheet 
+
+const { CronJob } = require('cron'); // Used for executing a job at a given date / time
+const fs = require('node:fs');    // Used for accessing and modifying files
+const path = require('node:path');    // Helps construct paths to access files and directories
+
 
 const slash_symbol = "$"
 const config = require( './token_bot.json' );   // Credentials for bot
 const sheetCreds = require('./token_sheets.json');  // Credentials for google sheet API
 const { join } = require('path');
+const { cp } = require('node:fs');
+
+const commands = {
+    nextGame : "release",
+    info : "info",
+    accessSpreadsheet: "list",
+    easterEggTut: "tut"
+}
+
 
 
 // Load Client with all authorizations
 const client = new Client({intents: 3276799})
-
 
 
 // -------------- Discord related stuff --------------
@@ -50,13 +61,13 @@ function updateActiveGuilds(){
 function checkCommand(command){
     command.toLowerCase()
     switch (command){
-        case 'release':
+        case commands.nextGame:
             return () => checkReleases()
-        case 'list':
+        case commands.accessSpreadsheet:
             return () => accessSpreadsheet()
-        case 'info':
+        case commands.info:
             return () => gameInfo()
-        case 'tut':
+        case commands.easterEggTuts:
             return () => snoot()
     }  
 }
@@ -71,13 +82,7 @@ function checkCommand(command){
 // -------------- Access Spreadsheet --------------
 
 
-function getCommingGames(){
-    
-}
-
-
-async function checkReleases(){
-    console.log("Checking game releases")
+async function getCommingGames(){ // Returns a list of objects
     // Spreadsheet key is the long id in the sheets URL
     const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
 
@@ -101,17 +106,28 @@ async function checkReleases(){
     const dateList = rows.map(row => new Date(convertDDMMYYYToDate(row['Release Date'])) );
     dateList.sort((a,b) => {return a-b; } )
     var today = new Date();
-    // today = new Date(convertDDMMYYYToDate('22.02.2023')); // For Debugging
+
+    // Next Date and corresponding Game
+    const nextDate = dateList.find(date => { return isFuture(today, date); })
+    const commingGames = rows.filter(row => { return row['Release Date']===printDate(nextDate) })
+
+    return commingGames
+
+}
+
+
+async function checkReleases(){
+    console.log("Checking game releases...")
+    
+    const commingGames = await getCommingGames()
 
     // Check release Date
-    if (dateList.includes(today)) { 
+    if (commingGames[0]['Release Date'] === printDate(new Date()) ) { 
         return 'New release Today';
     }else{
-        const nextDate = dateList.find(date => { return isFuture(today, date); })
-        const correspondingGameRows = rows.filter(row => { return row['Release Date']===printDate(nextDate) })
-        var text = `Next game release is ${correspondingGameRows[0]['Title']} on the ${printDate(nextDate)}.`;
-        if (correspondingGameRows.length > 1) {
-            text += (' ( And also ' + correspondingGameRows.slice(1).map(row => {return row['Title']}).join(', ') + ' )')
+        var text = `Next game release is ${commingGames[0]['Title']} on the ${commingGames[0]['Release Date']}.`;
+        if (commingGames.length > 1) {
+            text += (' ( And also ' + commingGames.slice(1).map(row => {return row['Title']}).join(', ') + ' )')
         }
         return text;
     }
@@ -122,7 +138,9 @@ async function accessSpreadsheet(){
 }
 
 async function gameInfo(){
-    const GameRow = getCommingGames();
+    const commingGames = await getCommingGames();
+    console.log(commingGames)
+    return `Next game is ${commingGames[0]['Title']} coming ${commingGames[0]['Release Date']} : \n${commingGames[0]['Description']}.`
 }
 
 
@@ -162,7 +180,7 @@ client.on("ready", () => {
 
 
 
-
+// Listen for $ commands
 client.on('messageCreate', msg => {
     // Don't react to own message
     if (msg.author.bot) return
@@ -174,8 +192,30 @@ client.on('messageCreate', msg => {
         const functionToExecute = checkCommand(message)
         if (functionToExecute){ 
             functionToExecute() 
-                .then( reply => msg.channel.send(reply) )
+                .then( reply => {   if(reply){ msg.channel.send(reply) }
+                                    else{ msg.channel.send('This is a valid Command, but code is not finished')} } )
         }
+    }
+})
+
+
+
+// Listen for slash commands
+client.on('interactionCreate', async interaction => {
+    if (!interaction.isChatInputCommand()) return;  // Exit if the interaction is not a slash command
+    
+    const command = interaction.client.commands.get(interaction.commandName);
+
+    if (!command){
+        console.error(`No command matching ${interaction.commandName} was found.`)
+        return;
+    }
+
+    try {
+        await command.execute(interaction);
+    } catch(error){
+        console.error(error);
+        await interaction.reply({content: 'There was an error while executing this command.', ephemeral: true });
     }
 })
 
@@ -193,10 +233,30 @@ async function snoot(){
 
 // -------------------------------------------------
 // const job = new CronJob('0 * 17 * * *', () => {
-//     sendMessage()
 // })
 
 // job.start()
+
+
+
+// Retrieve commands
+client.commands = new Collection()
+
+const commandsPath = path.join(__dirname, 'commands')
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js')) // Import all files
+
+for (const file of commandFiles){
+    // Require command
+    const filePath = path.join(commandsPath, file);
+    const command = require(filePath);
+	// Set a new item in the Collection with the key as the command name and the value as the exported module
+    if ('data' in command && 'execute' in command) {
+        client.commands.set(command.data.name, command)
+    }else{
+        console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+    }
+}
+
 
 
 client.login(config.TOKEN)
