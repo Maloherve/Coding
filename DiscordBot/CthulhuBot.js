@@ -1,5 +1,4 @@
 const { Client, Collection, Events, GatewayIntentBits } = require( 'discord.js' );
-const { GoogleSpreadsheet } = require('google-spreadsheet')     // access and modify google spreadsheet 
 
 const { CronJob } = require('cron'); // Used for executing a job at a given date / time
 const fs = require('node:fs');    // Used for accessing and modifying files
@@ -8,9 +7,9 @@ const path = require('node:path');    // Helps construct paths to access files a
 
 const slash_symbol = "$"
 const config = require( './token_bot.json' );   // Credentials for bot
-const sheetCreds = require('./token_sheets.json');  // Credentials for google sheet API
 const { join } = require('path');
 const { cp } = require('node:fs');
+const { getComingGames, printDate } = require(path.join(__dirname, 'tools.js'))
 
 const commands = {
     nextGame : "release",
@@ -18,6 +17,8 @@ const commands = {
     accessSpreadsheet: "list",
     easterEggTut: "tut"
 }
+
+
 
 
 
@@ -82,89 +83,68 @@ function checkCommand(command){
 // -------------- Access Spreadsheet --------------
 
 
-async function getCommingGames(){ // Returns a list of objects
-    // Spreadsheet key is the long id in the sheets URL
-    const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
+// async function getComingGames(){ // Returns a list of objects
+//     // Spreadsheet key is the long id in the sheets URL
+//     const doc = new GoogleSpreadsheet('1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M'); // Game Releases
 
-    // Authentificate using API key
-    await doc.useServiceAccountAuth({
-        client_email: sheetCreds.client_email,
-        private_key: sheetCreds.private_key,
-    });
+//     // Authentificate using API key
+//     await doc.useServiceAccountAuth({
+//         client_email: sheetCreds.client_email,
+//         private_key: sheetCreds.private_key,
+//     });
 
-    // Load document properties and worksheets
-    await doc.loadInfo(); 
-    const sheet = doc.sheetsByIndex[0]; // First spreadsheet
+//     // Load document properties and worksheets
+//     await doc.loadInfo(); 
+//     const sheet = doc.sheetsByIndex[0]; // First spreadsheet
 
-    // Extract Rows
-    const rows = await sheet.getRows({
-        offset: 0,
-        limit: 10000    
-    });
+//     // Extract Rows
+//     const rows = await sheet.getRows({
+//         offset: 0,
+//         limit: 10000    
+//     });
     
-    // Extract Dates and format them in new array and sort
-    const dateList = rows.map(row => new Date(convertDDMMYYYToDate(row['Release Date'])) );
-    dateList.sort((a,b) => {return a-b; } )
-    var today = new Date();
+//     // Extract Dates and format them in new array and sort
+//     const dateList = rows.map(row => new Date(convertDDMMYYYToDate(row['Release Date'])) );
+//     dateList.sort((a,b) => {return a-b; } )
+//     var today = new Date();
 
-    // Next Date and corresponding Game
-    const nextDate = dateList.find(date => { return isFuture(today, date); })
-    const commingGames = rows.filter(row => { return row['Release Date']===printDate(nextDate) })
+//     // Next Date and corresponding Game
+//     const nextDate = dateList.find(date => { return isFuture(today, date); })
+//     const comingGames = rows.filter(row => { return row['Release Date']===printDate(nextDate) })
 
-    return commingGames
+//     return comingGames
 
-}
+// }
 
 
-async function checkReleases(){
-    console.log("Checking game releases...")
+// async function checkReleases(){
+//     console.log("Checking game releases...")
     
-    const commingGames = await getCommingGames()
+//     const comingGames = await getComingGames()
 
-    // Check release Date
-    if (commingGames[0]['Release Date'] === printDate(new Date()) ) { 
-        return 'New release Today';
-    }else{
-        var text = `Next game release is ${commingGames[0]['Title']} on the ${commingGames[0]['Release Date']}.`;
-        if (commingGames.length > 1) {
-            text += (' ( And also ' + commingGames.slice(1).map(row => {return row['Title']}).join(', ') + ' )')
-        }
-        return text;
-    }
-}
+//     // Check release Date
+//     if (comingGames[0]['Release Date'] === printDate(new Date()) ) { 
+//         return 'New release Today';
+//     }else{
+//         var text = `Next game release is ${comingGames[0]['Title']} on the ${comingGames[0]['Release Date']}.`;
+//         if (comingGames.length > 1) {
+//             text += (' ( And also ' + comingGames.slice(1).map(row => {return row['Title']}).join(', ') + ' )')
+//         }
+//         return text;
+//     }
+// }
 
 async function accessSpreadsheet(){
     return 'If you want to access game releases or contribute : https://docs.google.com/spreadsheets/d/1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M/edit#gid=0'
 }
 
 async function gameInfo(){
-    const commingGames = await getCommingGames();
-    console.log(commingGames)
-    return `Next game is ${commingGames[0]['Title']} coming ${commingGames[0]['Release Date']} : \n${commingGames[0]['Description']}.`
+    const comingGames = await getComingGames();
+    return `Next game is ${comingGames[0]['Title']} coming ${comingGames[0]['Release Date']} : \n${comingGames[0]['Description']}.`
 }
 
 
 
-
-
-
-
-
-// -------------- Working with Dates --------------
-
-function isFuture(today, date){ return date >= today; }
-
-
-function convertDDMMYYYToDate(DDMMYYYY){
-    const split_date = DDMMYYYY.split('.');
-    const MMDDYYYY = [split_date[1],split_date[0],split_date[2]].join('.')
-    return new Date(MMDDYYYY); 
-}
-
-function printDate(date){
-    if (date.getMonth()+1 < 10) {return (date.getDate() + '.0' + (date.getMonth()+1) + '.' + date.getFullYear())}
-    else{return (date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear())}
-} 
 
 
 
