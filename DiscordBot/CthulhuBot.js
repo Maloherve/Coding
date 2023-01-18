@@ -134,14 +134,14 @@ function checkCommand(command){
 //     }
 // }
 
-async function accessSpreadsheet(){
-    return 'If you want to access game releases or contribute : https://docs.google.com/spreadsheets/d/1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M/edit#gid=0'
-}
+// async function accessSpreadsheet(){
+//     return 'If you want to access game releases or contribute : https://docs.google.com/spreadsheets/d/1J2m9s9cmBZxjGdFS4jUvWqTPP_za-K7jVd1J1ReWH6M/edit#gid=0'
+// }
 
-async function gameInfo(){
-    const comingGames = await getComingGames();
-    return `Next game is ${comingGames[0]['Title']} coming ${comingGames[0]['Release Date']} : \n${comingGames[0]['Description']}.`
-}
+// async function gameInfo(){
+//     const comingGames = await getComingGames();
+//     return `Next game is ${comingGames[0]['Title']} coming ${comingGames[0]['Release Date']} : \n${comingGames[0]['Description']}.`
+// }
 
 
 
@@ -202,9 +202,9 @@ client.on('interactionCreate', async interaction => {
 
 // -------------- Easter Eggs --------------
 
-async function snoot(){
-    return 'snoot'
-}
+// async function snoot(){
+//     return 'snoot'
+// }
 
 
 

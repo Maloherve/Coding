@@ -13,13 +13,13 @@ module.exports = {
     
         // Check release Date
         if (comingGames[0]['Release Date'] === printDate(new Date()) ) { 
-            return 'New release Today';
+            await interaction.reply('New release Today');
         }else{
             var text = `Next game release is ${comingGames[0]['Title']} on the ${comingGames[0]['Release Date']}.`;
             if (comingGames.length > 1) {
                 text += (' ( And also ' + comingGames.slice(1).map(row => {return row['Title']}).join(', ') + ' )')
             }
-            return text;
+            await interaction.reply(text);
         }
     },
 }
