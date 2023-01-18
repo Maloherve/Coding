@@ -91,16 +91,18 @@ client.on('messageCreate', msg => {
 
 
 // --- Listen for slash commands
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isChatInputCommand()) return;  // Exit if the interaction is not a slash command
+client.on('interactionCreate', async interaction => {   // Will not be called if interaction is not deployed 
+    // if (!interaction.isChatInputCommand()) return;  // Exit if the interaction is not a deployed command
     
-    const command = interaction.client.commands.get(interaction.commandName);
+    const command = interaction.client.commands.get(interaction.commandName);   // Get the name of the command in the list of client commands
 
-    if (!command){
+    if (!command){  // This can happen if the command has been deployed, but not loaded via loadCommands()
         console.error(`No command matching ${interaction.commandName} was found.`)
         return;
     }
 
+
+    // If didn't return before, then there is a corresponding command
     try {
         await command.execute(interaction);
     } catch(error){
