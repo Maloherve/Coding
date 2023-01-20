@@ -1,8 +1,25 @@
+const { getTitleOptions } = require("./tools.js")
 
 
-var test = [1,2,3,4,5,6,7]
 
-console.log(test.slice(1))
+
+
+// const argList = [1,2,3,4,5,6,8]
+// test(1,2,3,4)
+
+const fct = async (tut) => {
+    const list = await getTitleOptions()
+    test(...list)
+}
+
+function test(a, b, c, d){
+    for (let i=0; i<arguments.length; i++){
+        console.log(arguments[i])
+    }
+}
+
+
+fct()
 
 
 

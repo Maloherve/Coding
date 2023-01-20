@@ -6,18 +6,15 @@
 
 // You can then access the options using interaction.options.get_____('optionName'), where _____ is the type.
 const { SlashCommandBuilder, ChannelType } = require("discord.js");
-const wait = require('node:timers/promises').setTimeout;
+
+
 
 
 module.exports = {
     data: new SlashCommandBuilder()
             .setName('test2')
             .setDescription('Test command for commands with options.')
-            .addStringOption(option => 
-                option.setName('input')
-                    .setDescription('The input to echo back.') 
-                    .setRequired(true)  )
-            .addIntegerOption(option =>
+            .addIntegerOption( (option) =>
                 option.setName('number')
                     .setDescription('A number to be printed after the test')
                     .addChoices(
