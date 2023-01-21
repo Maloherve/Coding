@@ -38,8 +38,6 @@ async function getComingGames(){ // Returns a list of objects
 
 
 
-
-
 async function getGameProperty(idProperty, desiredProperty = 'Description'){
     const gameList = getGames_JSON()
     

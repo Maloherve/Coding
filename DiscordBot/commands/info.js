@@ -27,7 +27,8 @@ module.exports = {
 
         if (gameTitle) {
             const gameInfo = await getGameProperty({'Title': gameTitle}, 'Description')
-            await interaction.editReply(`Info sur ${gameTitle} : \n${gameInfo}`)
+            const gameDate = await getGameProperty({'Title': gameTitle}, 'Release Date')
+            await interaction.editReply(`Info sur ${gameTitle} ( ${gameDate} ) : \n${gameInfo}`)
         }else{
             await interaction.editReply(`Le prochain jeu à sortir est ${comingGames[0]['Title']}, le ${comingGames[0]['Release Date']} : \n${comingGames[0]['Description']}.`)
         }
