@@ -1,0 +1,90 @@
+[
+    {
+        "Title": "Fire Emblem Engage",
+        "Release Date": "20.01.2023",
+        "Description": "Fire Emblem. Je sais pas j'ai jamais joué et j'ai pas encore fais de recherche pour ce bot. Pour plus de question, contacter delphout.",
+        "Console": "Switch"
+    },
+    {
+        "Title": "Forspoken",
+        "Release Date": "24.01.2023",
+        "Description": "Magic open world parkour. Generic story, but nice visual effects.",
+        "Console": "PC, PS5"
+    },
+    {
+        "Title": "Dead Space",
+        "Release Date": "27.01.2023",
+        "Description": "Remaster de dead Space",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "Hogwarts Legacy",
+        "Release Date": "10.02.2023",
+        "Description": "Tu es un open World basique, Harry",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "Atomic Heart",
+        "Release Date": "21.02.2023",
+        "Description": "Bioshock Motherland",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "Kerbal Space Program 2",
+        "Release Date": "24.02.2023",
+        "Description": "Fly me to the moon",
+        "Console": "PC"
+    },
+    {
+        "Title": "Octopath Traveler 2",
+        "Release Date": "24.02.2023",
+        "Description": "Faut que je finisse le premier",
+        "Console": "PC, PS5, Switch"
+    },
+    {
+        "Title": "The Last of Us",
+        "Release Date": "03.03.2023",
+        "Description": "Remaster PC",
+        "Console": "PC"
+    },
+    {
+        "Title": "Star Wars Jedi : Survivor",
+        "Release Date": "17.03.2023",
+        "Description": "La suite de Fallen Order",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "Have a Nice Death",
+        "Release Date": "22.03.2023",
+        "Description": "While we wait for Silksong",
+        "Console": "PC, Switch"
+    },
+    {
+        "Title": "Resident Evil 4",
+        "Release Date": "24.03.2023",
+        "Description": "Classic",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "Meet your Maker",
+        "Release Date": "04.04.2023",
+        "Description": "FPS doomlike multiplayer tower defense",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "The Legend of Zelda : Tears of the Kingdom",
+        "Release Date": "12.05.2023",
+        "Description": "Suite de Zelda",
+        "Console": "Switch"
+    },
+    {
+        "Title": "Diablo 4",
+        "Release Date": "06.06.2023",
+        "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "Final Fantasy XVI",
+        "Release Date": "22.06.2023",
+        "Console": "PS5"
+    }
+]

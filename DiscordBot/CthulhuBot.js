@@ -5,7 +5,7 @@ const fs = require('node:fs');    // Used for accessing and modifying files
 const path = require('node:path');    // Helps construct paths to access files and directories
 
 const config = require( './token_bot.json' );   // Credentials for bot
-
+const { updateSpreadsheetJson } = require('./tools.js')
 
 
 
@@ -122,6 +122,10 @@ client.on('interactionCreate', async interaction => {   // Will not be called if
 async function __main__(){
     await loadCommands()
     console.log('Commands Loaded')
+    await updateSpreadsheetJson()
+    console.log('JSON list of games updated.')
+
+
     
     client.login(config.TOKEN)
 }
