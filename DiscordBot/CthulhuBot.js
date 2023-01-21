@@ -124,8 +124,6 @@ async function __main__(){
     console.log('Commands Loaded')
     await updateSpreadsheetJson()
     console.log('JSON list of games updated.')
-
-
     
     client.login(config.TOKEN)
 }
