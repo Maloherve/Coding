@@ -1,0 +1,65 @@
+:root{
+    /* Theme Page Colors */
+    --main-color: rgb(15, 15, 15);
+    --main-color-light: rgb(34, 34, 34);
+    --main-color-lighter: rgb(48, 48, 48);
+    --focus-color: rgb(22,63,114);
+    --secondary-color: rgb(22,63,114);
+
+    /* Theme font colors */
+    --text-color: white;
+    --text-color-dark: rgb(150,150,150);
+    --text-color-darker: rgb(90,90,90);
+}
+
+body {
+    background: var(--main-color);
+    color: #fff;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+
+/* Title */
+
+h1 {
+    text-align: center;
+    width: 100%;
+}
+
+
+
+/* Cards */
+
+.card_container {
+    --number-of-card: 5;
+    --card-size: 200px;
+    
+    display: grid;
+    height: var(--card-size);
+    width: 100%;
+    margin-top: 100px;
+
+    grid-template: 100% / repeat( var(--number-of-card) , 1fr);
+    grid-column-gap: 5px;
+    justify-items: center;
+}
+
+.card{
+    width: var(--card-size);
+    border-radius: 25px;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.card_container .card:hover{
+    transform: scale(1.2);
+}
+
+.card_container:hover > :not(:hover){
+    opacity: .3;
+}
+
+
+
