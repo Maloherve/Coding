@@ -4,7 +4,7 @@ const wait = require('node:timers/promises').setTimeout;
 
 module.exports = {
     data: new SlashCommandBuilder()
-            .setName('test1')
+            .setName('test1')   // Same name as the file
             .setDescription('Test command for different types of response.'),
     async execute(interaction){ // You have 3 seconds to reply, except if you use interaction.deferReply(), in which case you have 15 minutes
         await interaction.deferReply({ephemeral: true})

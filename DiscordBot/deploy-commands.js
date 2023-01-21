@@ -25,19 +25,20 @@ async function getCommands(){
 	for (const file of commandFiles) {
 		const filePath = path.join(commandsPath, file);
 		const command = require(filePath);
-	
+		
 		// This allows for data to be both async functions or regular objects
 		let commandData;
 		if (typeof command.data === 'object'){
 			commandData = command.data
 
 			if ( commandData.name.startsWith('test') )	{ testCommands.push(commandData.toJSON()); } // For Normal Commands
-													else{ commands.push(commandData.toJSON()); }	 // For test commands
+			else{ commands.push(commandData.toJSON()); }	 // For test commands
 			
 		}else if (typeof command.data === 'function'){
 			commandData = await command.data()
+			
 			if ( commandData.name.startsWith('test') )	{ testCommands.push(commandData.toJSON()); } // For Normal Commands
-													else{ commands.push(commandData.toJSON()); }	 // For test commands
+			else{ commands.push(commandData.toJSON()); }	 // For test commands
 		}
 	
 		// Calls the toJSON function of the SlashCommandBuilder (contains the setName, setDescription etc...) No information on the execute !	

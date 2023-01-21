@@ -2,8 +2,6 @@ const { SlashCommandBuilder } = require("discord.js");
 const { getTitleOptions } = require("../tools.js")
 
 
-
-
 module.exports = {
     data: async () => {
         // The list is fetched here (where we can use promises and async-await) before the SlashCommandBuilder gets made.
@@ -19,6 +17,8 @@ module.exports = {
             );
     },
     async execute(interaction){
-        await interaction.reply('Testing')
+        const gameTitle = interaction.options.getString('input') ?? 'None Selected'
+        console.log(gameTitle)
+        await interaction.reply('The game you selected is : '+ gameTitle)
     }
 }

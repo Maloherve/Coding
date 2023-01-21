@@ -48,7 +48,7 @@ function updateActiveGuilds(){
 
 
 
-function loadCommands(){
+async function loadCommands(){
     // Retrieve commands by adding them to client.commands
     client.commands = new Collection()
 
@@ -60,8 +60,13 @@ function loadCommands(){
         const filePath = path.join(commandsPath, file);
         const command = require(filePath);
         // Set a new item in the Collection with the key as the command name and the value as the exported module
-        if ('data' in command && 'execute' in command) {
-            client.commands.set(command.data.name, command)
+        if ('data' in command && 'execute' in command) {            
+            if (typeof command.data == 'object') {
+                await client.commands.set(command.data.name, command)
+            }else if (typeof command.data == 'function'){
+                const data = await command.data()
+                client.commands.set(data.name, command) // The await is not very usefull here, but indicates that this is async 
+            }
         }else{
             console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
         }
@@ -114,7 +119,12 @@ client.on('interactionCreate', async interaction => {   // Will not be called if
 
 
 
+async function __main__(){
+    await loadCommands()
+    console.log('Commands Loaded')
+    
+    client.login(config.TOKEN)
+}
 
-loadCommands()
 
-client.login(config.TOKEN)
+__main__()
