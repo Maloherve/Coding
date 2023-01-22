@@ -92,6 +92,7 @@ client.on("ready", () => {
 client.on('messageCreate', msg => {
     // Don't react to own message
     if (msg.author.bot) return
+
 })
 
 

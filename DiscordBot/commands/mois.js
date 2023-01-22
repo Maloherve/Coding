@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, Embed } = require("discord.js");
 const { getGamesInMonth } = require('../tools.js')
 
 const monthList = [
@@ -27,9 +27,19 @@ module.exports = {
     async execute(interaction){
         const moisInt = interaction.options.getInteger('mois') ?? 01
         const moisStr = monthList.filter(month => month.value === moisInt)[0].name
-        const games = getGamesInMonth(moisInt).map(game => game['Title']).join('\n')
         
+        // Parse Embed Objects
+        const embedGames = getGamesInMonth(moisInt).map(game => { return {name: game['Title'], value: game['Release Date'], inline: false} })
 
-        interaction.reply(`Voici les jeux à sortir en ${moisStr}.\n${games}`)
+        // Create the Embed Message and add the fields
+        const embedMessage = new EmbedBuilder()
+        embedGames.forEach(game => embedMessage.addFields(game))
+
+        // Reply to message
+        interaction.reply({
+            embeds: [embedMessage
+                        .setTitle(`Voici les jeux à sortir en ${moisStr}.`)
+                        .setDescription("Utiliser `/info NOM_DU_JEU` pour obtenir plus d'information ")],
+        })
     }
 }
