@@ -2,43 +2,67 @@
     {
         "Title": "Fire Emblem Engage",
         "Release Date": "20.01.2023",
-        "Description": "Fire Emblem. Je sais pas j'ai jamais joué et j'ai pas encore fais de recherche pour ce bot. Pour plus de question, contacter delphout.",
-        "Console": "Switch"
+        "Description": "Tactical RPG au Tour par Tour. 14eme opus de la série Fire Emblem.",
+        "Developpeurs": "Intelligent Systems",
+        "Editeurs": "Nintendo",
+        "Console": "Switch",
+        "Image": "https://assets-prd.ignimgs.com/2022/09/13/fire-emblem-engage-button-1663083482644.jpg"
     },
     {
         "Title": "Forspoken",
         "Release Date": "24.01.2023",
-        "Description": "Magic open world parkour. Generic story, but nice visual effects.",
-        "Console": "PC, PS5"
+        "Description": "RPG en monde ouvert fantastique centré sur le déplacement. Beaucoup de détails dans les animations et les effets magiques.",
+        "Developpeurs": "Luminous Productions",
+        "Editeurs": "Square Enix",
+        "Console": "PC, PS5",
+        "Image": "https://blog.fr.playstation.com/tachyon/sites/10/2023/01/98008f542f183475ca9629c29a27d2c22f6a5c9a.jpg?resize=1024%2C1024&crop_strategy=smart&zoom=0.25"
     },
     {
         "Title": "Dead Space",
         "Release Date": "27.01.2023",
-        "Description": "Remaster de dead Space",
+        "Description": "Remaster de Dead Space (2008). Third Person Shooter survival horror.",
+        "Developpeurs": "Motive Studios",
+        "Editeurs": "Electronic Arts",
         "Console": "PC, PS5, XBX"
+    },
+    {
+        "Title": "SEASON: A letter to the future",
+        "Release Date": "31.01.2023",
+        "Description": "Third-person atmospheric adventure bicycle road trip game. Collect memories before a mysterious cataclysm washes everything away. Ride, record, meet people, and unravel the strange world around you.",
+        "Developpeurs": "Scavengers Studio",
+        "Editeurs": "Scavengers Studio",
+        "Console": "PC, PS5"
     },
     {
         "Title": "Hogwarts Legacy",
         "Release Date": "10.02.2023",
-        "Description": "Tu es un open World basique, Harry",
+        "Description": "Action-RPG en open world. Se passe à Poudlard dans les années 1800.",
+        "Developpeurs": "Avalanche Software",
+        "Editeurs": "Warner Bros",
         "Console": "PC, PS5, XBX"
     },
     {
         "Title": "Atomic Heart",
         "Release Date": "21.02.2023",
-        "Description": "Bioshock Motherland",
+        "Description": "Action-RPG FPS, à la Bioshock. Uchronie dans les années 40 en URSS.",
+        "Developpeurs": "Mundfish",
+        "Editeurs": "Focus Entertainment",
         "Console": "PC, PS5, XBX"
     },
     {
         "Title": "Kerbal Space Program 2",
         "Release Date": "24.02.2023",
-        "Description": "Fly me to the moon",
+        "Description": "Simulation de vol spatial. Successeur de KBS (2011)",
+        "Developpeurs": "Intercept Games",
+        "Editeurs": "Private Division",
         "Console": "PC"
     },
     {
         "Title": "Octopath Traveler 2",
         "Release Date": "24.02.2023",
-        "Description": "Faut que je finisse le premier",
+        "Description": "RPG à tour de rôle. ",
+        "Developpeurs": "Acquire, Square Enix",
+        "Editeurs": "Square Enix",
         "Console": "PC, PS5, Switch"
     },
     {
@@ -86,11 +110,5 @@
         "Title": "Final Fantasy XVI",
         "Release Date": "22.06.2023",
         "Console": "PS5"
-    },
-    {
-        "Title": "SEASON: A letter to the future",
-        "Release Date": "31.01.2023",
-        "Description": "Collect memories before a mysterious cataclysm washes everything away. Ride, record, meet people, and unravel the strange world around you.Third-person atmospheric adventure bicycle road trip game.",
-        "Console": "PC, PS5"
     }
 ]

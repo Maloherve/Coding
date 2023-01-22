@@ -12,6 +12,7 @@ module.exports = {
     getGameProperty: (idProperty, desiredProperty) => getGameProperty(idProperty, desiredProperty),
     updateSpreadsheetJson: () => updateSpreadsheetJson(),
     getGamesInMonth: (month) => getGamesInMonth(month),
+    getGame: (idProperty) => getGame(idProperty),
 }
 
 
@@ -57,25 +58,24 @@ function getGames_JSON(){
 async function updateSpreadsheetJson(){
     // Get rows from sheets
     const rows = await getGames_Spreadsheet()
-
+    
     
     // Get array of game objects
-    let Games_Parsed = getGames_JSON()
-    const existingTitles = Games_Parsed.map(game => game['Title'])
+    let Games_Parsed = []
 
     // Go through the rows and add the new ones to the JSON.
     rows.forEach(gameRow => {
-        if ( !existingTitles.includes(gameRow['Title']) ){
             Games_Parsed.push({
                 'Title': gameRow['Title'],
                 'Release Date': gameRow['Release Date'],
                 'Description': gameRow['Description'],
+                'Developpeurs' : gameRow['Developpeurs'],
+                'Editeurs' : gameRow['Editeurs'],
                 'Console': gameRow['Console'],
-                'Links': gameRow['Links'],
+                'Image': gameRow['Image'],
             }) 
-        }
     })
-
+    
     // Convert to String and push to Json
     Games_String = JSON.stringify(Games_Parsed, null, 4);
     fs.writeFileSync('DiscordBot/game_releases.json', Games_String)
@@ -153,6 +153,18 @@ function getGamesInMonth(month){
 }
 
 
+function getGame(idProperty){
+    const gameList = getGames_JSON()
+    
+    let game;
+    for (key in idProperty){   // Get the key name as prop
+        game = gameList.filter(game => game[key] === idProperty[key])[0]
+    }
+
+    return game
+}
+
+
 
 
 
@@ -170,23 +182,5 @@ function printDate(date){
     if (date.getMonth()+1 < 10) {return (date.getDate() + '.0' + (date.getMonth()+1) + '.' + date.getFullYear())}
     else{return (date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear())}
 }
-
-
-
-const test = [
-    {name: "Janvier", value: 1},
-    {name: "Février", value: 2},
-    {name: "Mars", value: 3},
-    {name: "Avril", value: 4},
-    {name: "Mai", value: 5},
-    {name: "Juin", value: 6},
-    {name: "Juillet", value: 7},
-    {name: "Aout", value: 8},
-    {name: "Septembre", value: 9},
-    {name: "Octobre", value: 10},
-    {name: "Novembre", value: 11},
-    {name: "Décembre", value: 12}
-]
-
 
 
