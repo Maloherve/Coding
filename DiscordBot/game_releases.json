@@ -23,7 +23,8 @@
         "Description": "Remaster de Dead Space (2008). Third Person Shooter survival horror.",
         "Developpeurs": "Motive Studios",
         "Editeurs": "Electronic Arts",
-        "Console": "PC, PS5, XBX"
+        "Console": "PC, PS5, XBX",
+        "Image": "https://static.wikia.nocookie.net/deadspace/images/1/1d/Deadspaceremake_poster1.jpg/revision/latest?cb=20221003152557"
     },
     {
         "Title": "SEASON: A letter to the future",
@@ -31,7 +32,8 @@
         "Description": "Third-person atmospheric adventure bicycle road trip game. Collect memories before a mysterious cataclysm washes everything away. Ride, record, meet people, and unravel the strange world around you.",
         "Developpeurs": "Scavengers Studio",
         "Editeurs": "Scavengers Studio",
-        "Console": "PC, PS5"
+        "Console": "PC, PS5",
+        "Image": "https://assets-prd.ignimgs.com/2020/12/11/season-button-1607650185611.jpg"
     },
     {
         "Title": "Hogwarts Legacy",
@@ -39,7 +41,8 @@
         "Description": "Action-RPG en open world. Se passe à Poudlard dans les années 1800.",
         "Developpeurs": "Avalanche Software",
         "Editeurs": "Warner Bros",
-        "Console": "PC, PS5, XBX"
+        "Console": "PC, PS5, XBX",
+        "Image": "https://image.api.playstation.com/vulcan/ap/rnd/202208/0921/Ah7Ar9MU0r1BBlzAUflmhyQP.png"
     },
     {
         "Title": "Atomic Heart",
@@ -47,7 +50,8 @@
         "Description": "Action-RPG FPS, à la Bioshock. Uchronie dans les années 40 en URSS.",
         "Developpeurs": "Mundfish",
         "Editeurs": "Focus Entertainment",
-        "Console": "PC, PS5, XBX"
+        "Console": "PC, PS5, XBX",
+        "Image": "https://i.pinimg.com/564x/72/a4/3d/72a43d61348dd8d02645c8901208efef.jpg"
     },
     {
         "Title": "Kerbal Space Program 2",
@@ -55,7 +59,8 @@
         "Description": "Simulation de vol spatial. Successeur de KBS (2011)",
         "Developpeurs": "Intercept Games",
         "Editeurs": "Private Division",
-        "Console": "PC"
+        "Console": "PC",
+        "Image": "https://styles.redditmedia.com/t5_23egsq/styles/communityIcon_mkthmgk0j6i31.png"
     },
     {
         "Title": "Octopath Traveler 2",
@@ -63,43 +68,62 @@
         "Description": "RPG à tour de rôle. ",
         "Developpeurs": "Acquire, Square Enix",
         "Editeurs": "Square Enix",
-        "Console": "PC, PS5, Switch"
+        "Console": "PC, PS5, Switch",
+        "Image": "https://styles.redditmedia.com/t5_71lf63/styles/communityIcon_vxbe0eaeb6y91.png?width=256&s=955428cc9d578b13327b99b7285603a30cbde15a"
     },
     {
         "Title": "The Last of Us",
         "Release Date": "03.03.2023",
-        "Description": "Remaster PC",
-        "Console": "PC"
+        "Description": "Action-aventure survival horreur, axé infiltration et histoire. Remaster PC du titre de 2013.",
+        "Developpeurs": "Naughty Dog",
+        "Editeurs": "Sony Interactive",
+        "Console": "PC",
+        "Image": "https://image.jeuxvideo.com/medias-sm/165943/1659428750-8481-jaquette-avant.jpg"
     },
     {
         "Title": "Star Wars Jedi : Survivor",
         "Release Date": "17.03.2023",
-        "Description": "La suite de Fallen Order",
-        "Console": "PC, PS5, XBX"
+        "Description": "Action-aventure 'souls-like' dans l'univers de Star Wars, entre la chute des Jedi et le début de l'empire. Suite de Fallen Order",
+        "Developpeurs": "Respawn Entertainment",
+        "Editeurs": "Electronic Arts",
+        "Console": "PC, PS5, XBX",
+        "Image": "https://static.actugaming.net/media/2022/06/star-wars-jedi-survivor-jaquette.jpg"
     },
     {
         "Title": "Have a Nice Death",
         "Release Date": "22.03.2023",
-        "Description": "While we wait for Silksong",
-        "Console": "PC, Switch"
+        "Description": "2D platformer roguelike. Vous incarné la mort, approchant le burnout ",
+        "Developpeurs": "Magic Design Studios",
+        "Editeurs": " Gearbox Publishing",
+        "Console": "PC, Switch",
+        "Image": "https://image.jeuxvideo.com/medias-sm/163957/1639573737-2441-jaquette-avant.gif"
     },
     {
         "Title": "Resident Evil 4",
         "Release Date": "24.03.2023",
-        "Description": "Classic",
-        "Console": "PC, PS5, XBX"
+        "Description": "Survival horrore TPS.Remake du jeu de 2005.",
+        "Developpeurs": "Capcom",
+        "Editeurs": "Capcom",
+        "Console": "PC, PS5, XBX",
+        "Image": "https://image.api.playstation.com/vulcan/ap/rnd/202210/0706/EVWyZD63pahuh95eKloFaJuC.png"
     },
     {
         "Title": "Meet your Maker",
         "Release Date": "04.04.2023",
         "Description": "FPS doomlike multiplayer tower defense",
-        "Console": "PC, PS5, XBX"
+        "Developpeurs": "Behaviour Interactive",
+        "Editeurs": "Behaviour Interactive",
+        "Console": "PC, PS5, XBX",
+        "Image": "https://cdn.akamai.steamstatic.com/steam/apps/1194810/capsule_616x353.jpg?t=1673371489"
     },
     {
         "Title": "The Legend of Zelda : Tears of the Kingdom",
         "Release Date": "12.05.2023",
-        "Description": "Suite de Zelda",
-        "Console": "Switch"
+        "Description": "Action aventure. Suite de Breath of the Wild.",
+        "Developpeurs": "Nintendo EPD",
+        "Editeurs": "Nintendo",
+        "Console": "Switch",
+        "Image": "https://static.fnac-static.com/multimedia/Images/FR/MDM/24/35/1f/18822436/1520-1/tsp20230110113605/The-Legend-of-Zelda-Tears-Of-The-Kingdom-Nintendo-Switch.jpg"
     },
     {
         "Title": "Diablo 4",

@@ -32,7 +32,7 @@ module.exports = {
                             .addFields(
                                 {name: 'Developpeurs', value: game['Developpeurs'] ?? '-', inline: true},
                                 {name: 'Editeurs', value: game['Editeurs'] ?? '-', inline: true},
-                                {name: 'Date de Sortie', value: game['Release Date'] ?? '-', inline: true},
+                                {name: 'Date de Sortie', value: game['Release Date'] ?? 'TBA', inline: true},
                                 { name: '\u200B', value: '\u200B' },
                                 {name: 'Description', value: game['Description'] ?? '-', inline: true},
                             ) ],

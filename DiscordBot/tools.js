@@ -88,7 +88,7 @@ async function updateSpreadsheetJson(){
 
 
 // Returns a list games that are comming next
-async function getComingGames(){ 
+function getComingGames(){ 
     const gameList = getGames_JSON()
     
     // Extract Dates and format them in new array and sort
@@ -102,8 +102,6 @@ async function getComingGames(){
 
     return comingGames
 }
-
-
 
 
 async function getGameProperty(idProperty, desiredProperty = 'Description'){
@@ -146,7 +144,6 @@ function getGamesInMonth(month){
         return gameMonth === month
     });
 
-    // console.log(gameList)
     return gameList
 
 

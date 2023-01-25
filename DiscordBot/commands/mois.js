@@ -33,9 +33,10 @@ module.exports = {
 
         // Create the Embed Message and add the fields
         const embedMessage = new EmbedBuilder()
+        embedMessage.addFields({ name: '\u200B', value: '\u200B' })
         embedGames.forEach(game => embedMessage.addFields(game))
 
-        // Reply to message
+        // Reply to messages
         interaction.reply({
             embeds: [embedMessage
                         .setTitle(`Voici les jeux à sortir en ${moisStr}.`)

@@ -1,26 +1,9 @@
-const { getTitleOptions } = require("./tools.js")
 
 
 
+const tut = {test1: 'hello', test2: 'world'}
 
-
-// const argList = [1,2,3,4,5,6,8]
-// test(1,2,3,4)
-
-const fct = async (tut) => {
-    const list = await getTitleOptions()
-    test(...list)
-}
-
-function test(a, b, c, d){
-    for (let i=0; i<arguments.length; i++){
-        console.log(arguments[i])
-    }
-}
-
-
-fct()
-
+console.log(tut.test3)
 
 
 // let Dates = [ '20.03.2023', '24.10.2023', '27.01.2024', '29.02.2023', '21.09.2023', '24.02.2023', '24.02.2023', '03.05.2023', '17.04.2023', '22.03.2023' ]
