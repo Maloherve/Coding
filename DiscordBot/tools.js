@@ -58,7 +58,7 @@ function getGames_JSON(){
 async function updateSpreadsheetJson(){
     // Get rows from sheets
     const rows = await getGames_Spreadsheet()
-    
+
     
     // Get array of game objects
     let Games_Parsed = []
